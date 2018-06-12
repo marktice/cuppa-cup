@@ -1,3 +1,6 @@
+const cupsList = document.querySelector('ul');
+const cupForm = document.querySelector('form');
+
 function createCupItem(cup) {
   const li = document.createElement('li');
   
@@ -36,13 +39,47 @@ async function fetchCups() {
   return await response.json();
 };
 
-const cupsList = document.querySelector('ul');
+fetchCups().then((cups) => {
+  cups.forEach(cup => {
+    cupsList.appendChild(createCupItem(cup))
+  });
+}).catch((err) => {
+  console.log(err);
+});
 
-fetchCups()
-  .then((cups) => {
-    cups.forEach(cup => {
-      cupsList.appendChild(createCupItem(cup))
-    });
+cupForm.addEventListener('submit', submitForm);
+
+function submitForm(e) {
+  e.preventDefault();
+  const formElements = e.target.elements;
+  const color = formElements.color.value;
+  const material = formElements.material.value;
+
+  const cup = {
+    color,
+    material
+  }
+
+  postCup(cup).then((cup) => {
+    e.target.reset()
+    return createCupItem(cup)
+  }).then((el) => {
+    cupsList.prepend(el);
   }).catch((err) => {
     console.log(err);
   });
+}
+
+async function postCup(cup) {
+  const url = 'http://localhost:3000/';
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(cup)
+  }
+  const response = await fetch(url, options);
+  const newCup = await response.json();
+  return newCup;
+};
