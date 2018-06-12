@@ -1,0 +1,14 @@
+{
+  "name": "cuppa-cup",
+  "version": "1.0.0",
+  "description": "Make yo cups pretty",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mark, Calista, Gen",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
