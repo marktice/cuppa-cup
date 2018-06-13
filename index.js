@@ -5,6 +5,7 @@ function createCupItem(cup) {
   const div = document.createElement('div');
   div.className = 'card border-secondary mb-3';
   div.style.minWidth = "18rem"
+  div.style.maxWidth = "50%"
   div.style.background = `${cup.color}`;
 
   // second lvl
@@ -16,9 +17,9 @@ function createCupItem(cup) {
   divContent.classList.add('card-body');
   
   // 3rd lvl
-  const h5 = document.createElement('h5');
-  h5.classList.add('card-title');
-  h5.textContent = `Color: ${cup.color}`;
+  const h6 = document.createElement('h6');
+  h6.classList.add('card-title');
+  h6.textContent = `Color: ${cup.color}`;
   const p = document.createElement('p');
   p.classList.add('card-text');
   p.textContent = `Material: ${cup.material}`;
@@ -34,7 +35,7 @@ function createCupItem(cup) {
   
   accessoriesList.textContent = 'Accessories: ' + accessories.join(', ');
 
-  divContent.appendChild(h5);
+  divContent.appendChild(h6);
   divContent.appendChild(p);
   divContent.appendChild(accessoriesList);
   div.appendChild(divHeader)

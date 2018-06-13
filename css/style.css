@@ -7,7 +7,18 @@ body {
 }
 
 form {
+  padding: 25px 15px; 
   margin: 0 auto;
+}
+
+.card-group {
+  margin: 25px;
+}
+.card {
+  margin: 10px;
+}
+.card-header {
+  font-size: 24pt;
 }
 
 .blink {
