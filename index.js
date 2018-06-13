@@ -19,10 +19,23 @@ function createCupItem(cup) {
   // 3rd lvl
     const h5 = document.createElement('h5');
     h5.classList.add('card-title');
-    h5.textContent = `Awesome ${cup.color} Cup, ${cup.tassels}`;
+    h5.textContent = `Color: ${cup.color}`;
     const p = document.createElement('p');
     p.classList.add('card-text');
     p.textContent = `Material: ${cup.material}`;
+    
+    const accessoriesList = document.createElement('p');
+    accessoriesList.classList.add('card-text');
+
+    const accessories = [];
+    for (const key in cup.accessories) {
+      if (cup.accessories[key] === true) {
+        accessories.push(key);
+      }
+    }
+    accessoriesList.textContent = accessories;
+
+    divContent.appendChild(accessoriesList);
   
   divContent.appendChild(h5);
   divContent.appendChild(p);
@@ -65,12 +78,14 @@ function submitForm(e) {
   const cup = {
     color,
     material,
-    tassels,
-    pomPoms,
-    knitedCupSweater,
-    chimes,
-    charms,
-    bluetoothSpeakers
+    accessories: {
+      tassels,
+      pomPoms,
+      knitedCupSweater,
+      chimes,
+      charms,
+      bluetoothSpeakers
+    }
   }
 
   postCup(cup).then((cup) => {
