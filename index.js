@@ -1,49 +1,46 @@
-const cupsList = document.querySelector('ul');
+const cupsList = document.querySelector('.card-group');
 const cupForm = document.querySelector('form');
 
 function createCupItem(cup) {
-  const li = document.createElement('li');
-  
   const div = document.createElement('div');
   div.className = 'card border-secondary mb-3';
-  div.style.maxWidth = "18rem"
+  div.style.minWidth = "18rem"
+  div.style.background = `${cup.color}`;
 
   // second lvl
   const divHeader = document.createElement('div');
   divHeader.classList.add('card-header');
-  divHeader.textContent = `A ${cup.color} Cup`;
+  divHeader.textContent = `${cup.name}`;
 
   const divContent = document.createElement('div');
   divContent.classList.add('card-body');
   
   // 3rd lvl
-    const h5 = document.createElement('h5');
-    h5.classList.add('card-title');
-    h5.textContent = `Color: ${cup.color}`;
-    const p = document.createElement('p');
-    p.classList.add('card-text');
-    p.textContent = `Material: ${cup.material}`;
-    
-    const accessoriesList = document.createElement('p');
-    accessoriesList.classList.add('card-text');
-
-    const accessories = [];
-    for (const key in cup.accessories) {
-      if (cup.accessories[key] === true) {
-        accessories.push(key);
-      }
-    }
-    accessoriesList.textContent = accessories;
-
-    divContent.appendChild(accessoriesList);
+  const h5 = document.createElement('h5');
+  h5.classList.add('card-title');
+  h5.textContent = `Color: ${cup.color}`;
+  const p = document.createElement('p');
+  p.classList.add('card-text');
+  p.textContent = `Material: ${cup.material}`;
   
+  const accessoriesList = document.createElement('p');
+  accessoriesList.classList.add('card-text');
+  const accessories = [];
+  for (const key in cup.accessories) {
+    if (cup.accessories[key] === true) {
+      accessories.push(key);
+    }
+  }
+  
+  accessoriesList.textContent = 'Accessories: ' + accessories.join(', ');
+
   divContent.appendChild(h5);
   divContent.appendChild(p);
+  divContent.appendChild(accessoriesList);
   div.appendChild(divHeader)
   div.appendChild(divContent);
-  li.appendChild(div);
 
-  return li;
+  return div;
 }
 
 async function fetchCups() {
@@ -65,6 +62,7 @@ cupForm.addEventListener('submit', submitForm);
 function submitForm(e) {
   e.preventDefault();
   const formElements = e.target.elements;
+  const name = formElements.name.value;
   const color = formElements.color.value;
   const material = formElements.material.value;
   
@@ -76,6 +74,7 @@ function submitForm(e) {
   const bluetoothSpeakers = formElements.bluetoothSpeakers.checked;
 
   const cup = {
+    name,
     color,
     material,
     accessories: {

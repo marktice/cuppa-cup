@@ -12,8 +12,9 @@ form {
 
 .blink {
   font-family: Papyrus;
+  font-size: 48pt;
   text-align: center;
-  color: crimson;
+  color: #dc143c;
   animation: blink-animation .5s steps(5, start) infinite;
   -webkit-animation: blink-animation 1s steps(5, start) infinite;
 }

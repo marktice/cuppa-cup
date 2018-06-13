@@ -1,6 +1,7 @@
 const mongoose = require('../db/mongoose');
 
 const cupSchema = new mongoose.Schema({
+  name: String,
   color: String,
   material: String,
   accessories: {
